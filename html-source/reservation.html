@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/css/datepicker-bs5.min.css">
     <title>Bookings</title>
 </head>
 <body>
@@ -44,16 +45,16 @@
         <h1 class="display-5 fw-bold">Search for Availability</h1>
       </div>
       <div class="col-md-5 mx-auto">
-        <form action="" method="get" class="needs-validation" novalidate>
+        <form id="reservation-dates" method="get" class="needs-validation" novalidate>
           <div class="row">
             <div class="col mb-3">
               <label for="start_date" class="form-label">Starting Date</label>
-              <input required type="date" class="form-control" id="start_date" name="start_date" aria-describedby="startDateHelp">
+              <input required type="text" class="form-control" id="start_date" name="start_date" aria-describedby="startDateHelp">
               <div id="startDateHelp" class="form-text">Enter your starting date (YYYY-MM-DD).</div>
             </div>
             <div class="col mb-3">
                 <label for="end_date" class="form-label">Ending Date</label>
-                <input required type="date" class="form-control" id="end_date" name="end_date" aria-describedby="endDateHelp">
+                <input required type="text" class="form-control" id="end_date" name="end_date" aria-describedby="endDateHelp">
                 <div id="endDateHelp" class="form-text">Enter your ending date (YYYY-MM-DD).</div>
               </div>
           </div>
@@ -77,5 +78,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="js/form-validation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/js/datepicker-full.min.js"></script>
+    <script src="js/date-range-picker.js"></script>
+
+
 </body>
 </html>
