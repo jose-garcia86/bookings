@@ -1,5 +1,3 @@
-console.log("Validation");
-
 // Adds JS form validations
 (() => {
     'use strict';

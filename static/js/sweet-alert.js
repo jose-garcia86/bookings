@@ -57,18 +57,16 @@ function prompt () {
             msg = "",
         } = c;
 
-        const { value: formValues } = await Swal.fire({
+        const { value: result } = await Swal.fire({
             title: title,
             html:msg,
             backdrop: false,
             focusConfirm: false,
             showCancelButton: true,
             willOpen: () => {
-                const elem = document.getElementById('reservation-dates2');
-                const rangepicker = new DateRangePicker(elem, {
-                    format: "yyyy-mm-dd",
-                    showOnFocus: true
-                });
+                if (c.willOpen !== undefined){
+                    c.willOpen();
+                }
             },
             preConfirm: () => {
                 return [
@@ -77,13 +75,24 @@ function prompt () {
                 ]
             },
             didOpen: () => {
-                document.getElementById("start_date2").removeAttribute("disabled");
-                document.getElementById("end_date2").removeAttribute("disabled");
+              if(c.didOpen !== undefined){
+                  c.didOpen();
+              }
             },
         })
 
-        if (formValues) {
-            Swal.fire(JSON.stringify(formValues))
+        if(result){
+            if(result.dismiss !== Swal.DismissReason.cancel){
+                if (result.value !== ""){
+                    if(c.callback != undefined){
+                        c.callback(result);
+                    }
+                } else{
+                    c.callback(false);
+                }
+            } else {
+                c.callback(false);
+            }
         }
     }
 

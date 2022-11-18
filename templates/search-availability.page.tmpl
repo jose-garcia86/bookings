@@ -1,0 +1,35 @@
+{{template "base" .}}
+
+{{define "content"}}
+<main>
+    <div class="px-4 py-5 mt-4 mb-2 text-center">
+        <h1 class="display-5 fw-bold">Search for Availability</h1>
+    </div>
+    <div class="col-md-5 mx-auto">
+        <form  action="/search-availability" method="POST" class="needs-validation" novalidate>
+            <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+            <div id="reservation-dates">
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="start_date" class="form-label">Starting Date</label>
+                        <input required type="text" class="form-control" id="start_date" name="start_date"
+                               aria-describedby="startDateHelp">
+                        <div id="startDateHelp" class="form-text">Enter your starting date (YYYY-MM-DD).</div>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="end_date" class="form-label">Ending Date</label>
+                        <input required type="text" class="form-control" id="end_date" name="end_date"
+                               aria-describedby="endDateHelp">
+                        <div id="endDateHelp" class="form-text">Enter your ending date (YYYY-MM-DD).</div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Search Availability</button>
+        </form>
+    </div>
+</main>
+{{end}}
+
+{{define "js"}}
+    <script src="/static/js/date-range-picker.js"></script>
+{{end}}
