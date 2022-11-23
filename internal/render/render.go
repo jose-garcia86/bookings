@@ -1,6 +1,7 @@
 package render //
 import (
 	"bytes"
+	"fmt"
 	"github.com/jose-garcia86/bookings/internal/config"
 	"github.com/jose-garcia86/bookings/internal/models"
 	"github.com/justinas/nosurf"
@@ -11,6 +12,7 @@ import (
 )
 
 var app *config.AppConfig
+var pathToTemplates = "./templates"
 
 // NewTemplates sets the config for the template package
 func NewTemplates(a *config.AppConfig) {
@@ -18,6 +20,9 @@ func NewTemplates(a *config.AppConfig) {
 }
 
 func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	td.Flash = app.Session.PopString(r.Context(), "flash")
+	td.Error = app.Session.PopString(r.Context(), "error")
+	td.Warning = app.Session.PopString(r.Context(), "warning")
 	td.CSRFToken = nosurf.Token(r)
 	return td
 }
@@ -60,7 +65,7 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 	cache := map[string]*template.Template{}
 
 	// Get all the files named *.page.tmpl from ./templates folder
-	pages, err := filepath.Glob("./templates/*.page.tmpl")
+	pages, err := filepath.Glob(fmt.Sprintf("%s/*.page.tmpl", pathToTemplates))
 
 	if err != nil {
 		return cache, err
@@ -73,13 +78,13 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 		if err != nil {
 			return cache, err
 		}
-		matches, err := filepath.Glob("./templates/*.layout.tmpl")
+		matches, err := filepath.Glob(fmt.Sprintf("%s/*.layout.tmpl", pathToTemplates))
 		if err != nil {
 			return cache, err
 		}
 
 		if len(matches) > 0 {
-			ts, err = ts.ParseGlob("./templates/*.layout.tmpl")
+			ts, err = ts.ParseGlob(fmt.Sprintf("%s/*.layout.tmpl", pathToTemplates))
 			if err != nil {
 				return cache, err
 			}

@@ -91,6 +91,21 @@
 
 <script>
     let attention = prompt();
+
+    // Display Message when error ocurrs
+    {{with .Error}}
+        notify("error", "{{.}}")
+    {{end}}
+
+    // Display Message when success
+    {{with .Flash}}
+        notify("success", "{{.}}")
+    {{end}}
+
+    // Display warning Message
+    {{with .Warning}}
+    notify("warning","{{.}}")
+    {{end}}
 </script>
 
 </body>

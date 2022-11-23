@@ -6,23 +6,42 @@
         <h1 class="display-5 fw-bold">Make Reservation</h1>
     </div>
     <div class="col-md-5 mx-auto">
-        <form action="" method="post" class="needs-validation" novalidate>
+
+        {{$res := index .Data "reservation"}}
+        <form action="" method="post" class="" novalidate>
+            <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
             <div class="form-group">
                 <div class="mb-3">
                     <label for="first_name" class="form-label">First Name</label>
-                    <input required autocomplete="off" type="text" class="form-control" id="first_name" name="first_name" aria-describedby="firstNameHelp">
+                    {{with .Form.Errors.Get "first_name"}}
+                        <label class="d-block text-danger">{{.}}</label>
+                    {{end}}
+                    <input required autocomplete="off" type="text" class='form-control {{with .Form.Errors.Get "first_name"}} is-invalid {{end}}'
+                           id="first_name" name="first_name" value="{{$res.FirstName}}" aria-describedby="firstNameHelp">
                 </div>
                 <div class="mb-3">
                     <label for="last_name" class="form-label">Last Name</label>
-                    <input required autocomplete="off" type="text" class="form-control" id="last_name" name="last_name" aria-describedby="lastNameHelp">
+                    {{with .Form.Errors.Get "last_name"}}
+                        <label class="d-block text-danger">{{.}}</label>
+                    {{end}}
+                    <input required autocomplete="off" type="text" class='form-control {{with .Form.Errors.Get "last_name"}} is-invalid {{end}} '
+                           id="last_name" name="last_name" value="{{$res.LastName}}" aria-describedby="lastNameHelp">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input required autocomplete="off" type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                    {{with .Form.Errors.Get "email"}}
+                        <label class="d-block text-danger">{{.}}</label>
+                    {{end}}
+                    <input required autocomplete="off" type="email" class='form-control {{with .Form.Errors.Get "email"}} is-invalid {{end}}'
+                           id="email" name="email" value="{{$res.Email}}" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">
                     <label for="phone_number" class="form-label">Phone Number</label>
-                    <input required autocomplete="off" type="text" class="form-control" id="phone_number" name="phone_number" aria-describedby="PhoneNumberHelp">
+                    {{with .Form.Errors.Get "phone_number"}}
+                        <label class="d-block text-danger">{{.}}</label>
+                    {{end}}
+                    <input required autocomplete="off" type="text" class='form-control {{with .Form.Errors.Get "phone_number"}} is-invalid {{end}}'
+                           id="phone_number" name="phone_number" value="{{$res.Phone}}" aria-describedby="PhoneNumberHelp">
                 </div>
                 <button type="submit" class="btn btn-primary" value="Make Reservation">Make Reservation</button>
             </div>
