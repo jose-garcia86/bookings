@@ -8,7 +8,7 @@
     <div class="col-md-5 mx-auto">
 
         {{$res := index .Data "reservation"}}
-        <form action="" method="post" class="" novalidate>
+        <form action="/make-reservation" method="post" class="" novalidate>
             <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
             <div class="form-group">
                 <div class="mb-3">
@@ -43,6 +43,18 @@
                     <input required autocomplete="off" type="text" class='form-control {{with .Form.Errors.Get "phone_number"}} is-invalid {{end}}'
                            id="phone_number" name="phone_number" value="{{$res.Phone}}" aria-describedby="PhoneNumberHelp">
                 </div>
+                <div class="mb-3">
+                    <label for="start_date">Start Date</label>
+                    <input required autocomplete="off" type="text" class='form-control'
+                           id="start_date" name="start_date"  aria-describedby="StartDateHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="end_date">End Date</label>
+                    <input required autocomplete="off" type="text" class='form-control'
+                           id="end_date" name="end_date"  aria-describedby="EndDateHelp">
+                </div>
+                <input type="hidden" name="room_id" value="1">
+
                 <button type="submit" class="btn btn-primary" value="Make Reservation">Make Reservation</button>
             </div>
         </form>
